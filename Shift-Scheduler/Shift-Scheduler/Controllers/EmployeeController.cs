@@ -15,6 +15,7 @@ namespace Shift_Scheduler.Controllers
         // GET: Employee
         public ActionResult Index()
         {
+            //Session["EmpId"] = 1;
             if (Session["EmpId"] != null)
                 this.employee = db.Employees.Find(Session["EmpId"]);
             else
@@ -26,7 +27,7 @@ namespace Shift_Scheduler.Controllers
 
             ViewData["EmpShifts"] = employee.shiftSchedules;
             ViewData["EmpName"] = employee.firstName + " " + employee.lastName;
-            ViewData["EmpId"] = employee.employeeId;
+            //ViewData["EmpId"] = employee.employeeId;
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace Shift_Scheduler.Controllers
             }
             ViewData["EmployeeName"] = employee.firstName + " " + employee.lastName;
             ViewData["EmpId"] = employee.employeeId;
-            return View(employee);
+            return RedirectToAction("Index");
         }
 
         public ActionResult ShiftChangeRequest()
